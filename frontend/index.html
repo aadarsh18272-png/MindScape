@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mindscape — Focus. Transform. Grow.">
+    <title>Mindscape — Focus. Transform. Grow.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- AUTH SCREEN -->
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+        <div class="brand-mark">M</div>
+
+        <!-- SIGN IN -->
+        <form id="loginForm">
+
+            <h1>Welcome Back</h1>
+
+            <p>Sign in to continue your focus journey.</p>
+
+            <label for="loginEmail">Email</label>
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+            >
+
+            <label for="loginPassword">Password</label>
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit" class="primary-btn">
+                Sign In
+            </button>
+
+            <p id="loginError" class="login-error"></p>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <button type="button" id="showRegisterBtn">
+                    Sign Up
+                </button>
+            </p>
+
+        </form>
+
+
+        <!-- SIGN UP -->
+        <form id="registerForm" hidden>
+
+            <h1>Create Account</h1>
+
+            <p>Start your Mindscape journey.</p>
+
+            <label for="registerName">Name</label>
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Enter your name"
+                autocomplete="name"
+                required
+            >
+
+            <label for="registerEmail">Email</label>
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+            >
+
+            <label for="registerPassword">Password</label>
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required
+            >
+
+            <button type="submit" class="primary-btn">
+                Create Account
+            </button>
+
+            <p id="registerError" class="login-error"></p>
+
+            <p class="auth-switch">
+                Already have an account?
+                <button type="button" id="showLoginBtn">
+                    Sign In
+                </button>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">M</div>
+            <div>
+                <strong>MINDSCAPE</strong>
+                <span>Focus. Transform. Grow.</span>
+            </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+
+            <button class="nav-item active" data-page="dashboard">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="nav-item" data-page="study">
+                <span class="nav-icon">▣</span>
+                <span>Study Plan</span>
+            </button>
+
+            <button class="nav-item" data-page="focus">
+                <span class="nav-icon">◉</span>
+                <span>Focus</span>
+            </button>
+
+            <button class="nav-item" data-page="flashcards">
+                <span class="nav-icon">▤</span>
+                <span>Flashcards</span>
+            </button>
+
+            <button class="nav-item" data-page="ai">
+                <span class="nav-icon">✦</span>
+                <span>AI Tutor</span>
+            </button>
+
+            <button class="nav-item" data-page="tools">
+                <span class="nav-icon">⌘</span>
+                <span>Student Tools</span>
+            </button>
+
+            <button class="nav-item" data-page="analytics">
+                <span class="nav-icon">▥</span>
+                <span>Analytics</span>
+            </button>
+
+            <button class="nav-item" data-page="achievements">
+                <span class="nav-icon">◇</span>
+                <span>Achievements</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button class="nav-item" data-page="settings">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </button>
+
+            <div class="sidebar-quote">
+                <span>Your focus</span>
+                <strong>changes the world.</strong>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- MOBILE HEADER -->
+    <header class="mobile-header">
+        <button class="icon-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+
+        <div class="mobile-brand">
+            <span class="brand-mark small">M</span>
+            <strong>MINDSCAPE</strong>
+        </div>
+
+        <button class="icon-btn" data-page="settings" aria-label="Settings">⚙</button>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- ================= DASHBOARD ================= -->
+        <section class="page active" id="page-dashboard">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">WELCOME BACK</p>
+                    <h1 id="greeting">Good morning.</h1>
+                    <p class="muted" id="currentDate"></p>
+                </div>
+
+                <button class="primary-btn" data-page="focus">
+                    <span>Start Focus</span>
+                    <span>→</span>
+                </button>
+            </div>
+
+            <div class="hero-grid">
+
+                <div class="hero-card glass">
+                    <div class="hero-content">
+                        <p class="eyebrow">TODAY'S MINDSET</p>
+                        <h2>Your focus changes the world.</h2>
+                        <p>
+                            Small focused sessions compound into serious progress.
+                            What will you accomplish today?
+                        </p>
+
+                        <button class="outline-btn" data-page="focus">
+                            Begin a session
+                        </button>
+                    </div>
+
+                    <div class="hero-orb">
+                        <div class="orb-ring"></div>
+                        <div class="orb-core"></div>
+                    </div>
+                </div>
+
+                <div class="score-card glass">
+                    <div class="card-heading">
+                        <span>FOCUS SCORE</span>
+                        <span class="status-dot"></span>
+                    </div>
+
+                    <div class="score-number" id="dashboardScore">0</div>
+                    <div class="score-label" id="dashboardScoreLabel">Getting started</div>
+
+                    <div class="score-bar">
+                        <span id="dashboardScoreBar"></span>
+                    </div>
+
+                    <p class="muted">
+                        Based on consistency, sessions, goals and task completion.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- STATS -->
+            <div class="stats-grid">
+
+                <div class="stat-card glass">
+                    <span class="stat-icon">◷</span>
+                    <div>
+                        <small>Today's Focus</small>
+                        <strong><span id="todayMinutes">0</span> min</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card glass">
+                    <span class="stat-icon">◉</span>
+                    <div>
+                        <small>Sessions</small>
+                        <strong id="totalSessions">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card glass">
+                    <span class="stat-icon">↗</span>
+                    <div>
+                        <small>Current Streak</small>
+                        <strong><span id="currentStreak">0</span> days</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card glass">
+                    <span class="stat-icon">✓</span>
+                    <div>
+                        <small>Tasks Done</small>
+                        <strong id="tasksDone">0</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-grid">
+
+                <!-- DAILY GOAL -->
+                <div class="panel glass">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">DAILY TARGET</p>
+                            <h3>Today's Focus</h3>
+                        </div>
+
+                        <button class="text-btn" data-page="settings">Edit</button>
+                    </div>
+
+                    <div class="goal-display">
+                        <div>
+                            <strong id="goalMinutesDisplay">0</strong>
+                            <span>/ <span id="goalTargetDisplay">120</span> min</span>
+                        </div>
+                        <span id="goalPercentage">0%</span>
+                    </div>
+
+                    <div class="progress-bar large">
+                        <span id="dailyGoalBar"></span>
+                    </div>
+                </div>
+
+                <!-- UPCOMING -->
+                <div class="panel glass">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">UPCOMING</p>
+                            <h3>Study deadlines</h3>
+                        </div>
+
+                        <button class="text-btn" data-page="study">View all</button>
+                    </div>
+
+                    <div id="dashboardExams" class="mini-list"></div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-grid">
+
+                <!-- TASKS -->
+                <div class="panel glass">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">TODAY</p>
+                            <h3>Tasks</h3>
+                        </div>
+
+                        <button class="text-btn" id="dashboardAddTask">+ Add</button>
+                    </div>
+
+                    <div id="dashboardTasks" class="task-list"></div>
+                </div>
+
+                <!-- QUICK ACTIONS -->
+                <div class="panel glass">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">SHORTCUTS</p>
+                            <h3>Quick actions</h3>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <button class="quick-action" data-page="focus">
+                            <span>◉</span>
+                            <strong>Focus</strong>
+                            <small>Start a session</small>
+                        </button>
+
+                        <button class="quick-action" data-page="flashcards">
+                            <span>▤</span>
+                            <strong>Flashcards</strong>
+                            <small>Revise quickly</small>
+                        </button>
+
+                        <button class="quick-action" data-page="ai">
+                            <span>✦</span>
+                            <strong>AI Tutor</strong>
+                            <small>Ask a question</small>
+                        </button>
+
+                        <button class="quick-action" data-page="tools">
+                            <span>⌘</span>
+                            <strong>Tools</strong>
+                            <small>Student utilities</small>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOCUS ================= -->
+        <section class="page" id="page-focus">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">DEEP WORK</p>
+                    <h1>Focus</h1>
+                    <p class="muted">Turn time into visible progress.</p>
+                </div>
+            </div>
+
+            <div class="focus-layout">
+
+                <!-- FOCUS CONTROLS -->
+                <div class="focus-control-panel glass">
+
+                    <p class="eyebrow">SESSION INTENTION</p>
+
+                    <label for="focusIntention">What are you focusing on?</label>
+                    <input
+                        id="focusIntention"
+                        class="input"
+                        type="text"
+                        placeholder="e.g. Complete JavaScript arrays chapter"
+                        maxlength="120"
+                    >
+
+                    <div class="control-section">
+                        <div class="section-label">Duration</div>
+
+                        <div class="preset-grid">
+                            <button class="preset-btn" data-duration="15">15m</button>
+                            <button class="preset-btn active" data-duration="25">25m</button>
+                            <button class="preset-btn" data-duration="45">45m</button>
+                            <button class="preset-btn" data-duration="60">60m</button>
+                            <button class="preset-btn" data-duration="90">90m</button>
+                            <button class="preset-btn" id="customDurationBtn">Custom</button>
+                        </div>
+                    </div>
+
+                    <div class="control-section">
+                        <div class="section-label">Environment</div>
+
+                        <div class="environment-selector">
+
+                            <button class="environment-option active" data-environment="ice">
+                                <span>ICE</span>
+                                <small>Melting</small>
+                            </button>
+
+                            <button class="environment-option" data-environment="candle">
+                                <span>CANDLE</span>
+                                <small>Burning</small>
+                            </button>
+
+                            <button class="environment-option" data-environment="tree">
+                                <span>TREE</span>
+                                <small>Growing</small>
+                            </button>
+
+                            <button class="environment-option" data-environment="campfire">
+                                <span>FIRE</span>
+                                <small>Building</small>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="timer-actions">
+                        <button class="primary-btn big" id="timerStartBtn">Start Focus</button>
+                        <button class="outline-btn big" id="timerResetBtn">Reset</button>
+                    </div>
+
+                    <div class="focus-shortcuts">
+                        <span>SPACE</span> Start / Pause
+                        <span>R</span> Reset
+                    </div>
+
+                </div>
+
+
+                <!-- ENVIRONMENT -->
+                <div class="environment-panel glass">
+
+                    <div class="environment-top">
+                        <div>
+                            <p class="eyebrow">ENVIRONMENT</p>
+                            <h3 id="environmentName">Frozen Focus</h3>
+                        </div>
+
+                        <span class="progress-percent" id="environmentPercent">0%</span>
+                    </div>
+
+                    <div class="scene" id="scene">
+
+                        <!-- ICE -->
+                        <div class="environment-scene ice-scene active" id="iceScene">
+
+                            <div class="sky-glow"></div>
+
+                            <div class="ice-world">
+
+                                <div class="ice-block" id="iceBlock">
+                                    <div class="ice-highlight"></div>
+                                    <div class="ice-crack crack-one"></div>
+                                    <div class="ice-crack crack-two"></div>
+                                    <div class="ice-crack crack-three"></div>
+                                </div>
+
+                                <div class="ice-droplet drop-one"></div>
+                                <div class="ice-droplet drop-two"></div>
+                                <div class="ice-droplet drop-three"></div>
+
+                                <div class="water-pool" id="iceWater"></div>
+
+                            </div>
+
+                            <div class="scene-label">
+                                <strong id="iceStatus">Solid</strong>
+                                <span>Focus melts resistance.</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- CANDLE -->
+                        <div class="environment-scene candle-scene" id="candleScene">
+
+                            <div class="candle-glow"></div>
+
+                            <div class="candle-world">
+
+                                <div class="flame">
+                                    <div class="flame-inner"></div>
+                                </div>
+
+                                <div class="candle-body" id="candleBody">
+                                    <div class="wax-drop wax-one"></div>
+                                    <div class="wax-drop wax-two"></div>
+                                </div>
+
+                                <div class="candle-base"></div>
+
+                            </div>
+
+                            <div class="scene-label">
+                                <strong id="candleStatus">Fresh</strong>
+                                <span>Burn slowly. Work deeply.</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- TREE -->
+                        <div class="environment-scene tree-scene" id="treeScene">
+
+                            <div class="tree-ground"></div>
+
+                            <div class="tree-world" id="treeWorld">
+
+                                <div class="tree-trunk">
+                                    <div class="branch branch-left"></div>
+                                    <div class="branch branch-right"></div>
+                                    <div class="branch branch-top"></div>
+                                </div>
+
+                                <div class="leaf leaf-one"></div>
+                                <div class="leaf leaf-two"></div>
+                                <div class="leaf leaf-three"></div>
+                                <div class="leaf leaf-four"></div>
+                                <div class="leaf leaf-five"></div>
+                                <div class="leaf leaf-six"></div>
+
+                            </div>
+
+                            <div class="scene-label">
+                                <strong id="treeStatus">Seed</strong>
+                                <span>Growth requires patience.</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- CAMPFIRE -->
+                        <div class="environment-scene fire-scene" id="fireScene">
+
+                            <div class="fire-glow"></div>
+
+                            <div class="fire-world">
+
+                                <div class="log log-one"></div>
+                                <div class="log log-two"></div>
+
+                                <div class="fire-flame">
+                                    <div class="fire-core"></div>
+                                </div>
+
+                                <div class="spark spark-one"></div>
+                                <div class="spark spark-two"></div>
+                                <div class="spark spark-three"></div>
+
+                            </div>
+
+                            <div class="scene-label">
+                                <strong id="fireStatus">Starting</strong>
+                                <span>Build your momentum.</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timer-display">
+
+                        <div class="intention-display" id="intentionDisplay">
+                            Ready for your next session
+                        </div>
+
+                        <div class="timer-value" id="timerDisplay">25:00</div>
+
+                        <div class="timer-state" id="timerState">
+                            Ready
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DISTRACTIONS -->
+            <div class="panel glass distraction-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <p class="eyebrow">DISTRACTION PARKING</p>
+                        <h3>Got distracted? Park it here.</h3>
+                    </div>
+                </div>
+
+                <div class="distraction-form">
+                    <input
+                        id="distractionInput"
+                        class="input"
+                        placeholder="Instagram, reply to message, buy notebook..."
+                        maxlength="100"
+                    >
+                    <button class="primary-btn" id="addDistractionBtn">Park</button>
+                </div>
+
+                <div id="distractionList" class="distraction-list"></div>
+
+            </div>
+
+
+            <!-- SOUND -->
+            <div class="panel glass sound-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <p class="eyebrow">STUDY ATMOSPHERE</p>
+                        <h3>Soundscape</h3>
+                    </div>
+
+                    <button class="text-btn" id="muteSoundBtn">Mute</button>
+                </div>
+
+                <div class="sound-controls">
+
+                    <button class="sound-option active" data-sound="lofi">
+                        <span>♫</span>
+                        <strong>Lo-fi</strong>
+                    </button>
+
+                    <button class="sound-option" data-sound="rain">
+                        <span>≈</span>
+                        <strong>Rain</strong>
+                    </button>
+
+                    <button class="sound-option" data-sound="forest">
+                        <span>♧</span>
+                        <strong>Forest</strong>
+                    </button>
+
+                    <button class="sound-option" data-sound="fireplace">
+                        <span>♨</span>
+                        <strong>Fireplace</strong>
+                    </button>
+
+                    <button class="sound-option" data-sound="white">
+                        <span>∿</span>
+                        <strong>White Noise</strong>
+                    </button>
+
+                </div>
+
+                <label class="volume-control">
+                    <span>Volume</span>
+                    <input id="volumeSlider" type="range" min="0" max="100" value="50">
+                    <span id="volumeValue">50%</span>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STUDY PLAN ================= -->
+        <section class="page" id="page-study">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">ACADEMIC SYSTEM</p>
+                    <h1>Study Plan</h1>
+                    <p class="muted">Turn subjects into measurable progress.</p>
+                </div>
+
+                <button class="primary-btn" id="addSubjectBtn">+ Add Subject</button>
+            </div>
+
+            <div id="subjectsGrid" class="subjects-grid"></div>
+
+            <div class="panel glass">
+                <div class="panel-header">
+                    <div>
+                        <p class="eyebrow">EXAM COUNTDOWN</p>
+                        <h3>Upcoming exams</h3>
+                    </div>
+                </div>
+
+                <div id="examList" class="exam-list"></div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= FLASHCARDS ================= -->
+        <section class="page" id="page-flashcards">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">ACTIVE RECALL</p>
+                    <h1>Flashcards</h1>
+                    <p class="muted">Test yourself instead of rereading.</p>
+                </div>
+
+                <button class="primary-btn" id="addFlashcardBtn">+ Add Card</button>
+            </div>
+
+            <div class="flashcard-layout">
+
+                <div class="flashcard-panel glass">
+
+                    <div class="flashcard-progress">
+                        <span id="flashcardCounter">0 / 0</span>
+                        <span id="flashcardCategory">General</span>
+                    </div>
+
+                    <button class="flashcard" id="flashcard">
+
+                        <div class="flashcard-inner">
+
+                            <div class="flashcard-face flashcard-front">
+                                <span class="card-side-label">QUESTION</span>
+                                <h2 id="flashcardQuestion">
+                                    Add your first flashcard
+                                </h2>
+                                <span class="flip-hint">Click to reveal answer</span>
+                            </div>
+
+                            <div class="flashcard-face flashcard-back">
+                                <span class="card-side-label">ANSWER</span>
+                                <h2 id="flashcardAnswer">
+                                    Your answer will appear here.
+                                </h2>
+                                <span class="flip-hint">Click to flip back</span>
+                            </div>
+
+                        </div>
+
+                    </button>
+
+                    <div class="flashcard-actions">
+
+                        <button class="difficulty-btn again" data-review="again">
+                            Again
+                        </button>
+
+                        <button class="difficulty-btn hard" data-review="hard">
+                            Hard
+                        </button>
+
+                        <button class="difficulty-btn good" data-review="good">
+                            Good
+                        </button>
+
+                        <button class="difficulty-btn easy" data-review="easy">
+                            Easy
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= AI ================= -->
+        <section class="page" id="page-ai">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">STUDY ASSISTANT</p>
+                    <h1>AI Tutor</h1>
+                    <p class="muted">Ask questions, revise concepts and practice.</p>
+                </div>
+            </div>
+
+            <div class="ai-layout">
+
+                <div class="ai-chat glass">
+
+                    <div class="ai-header">
+                        <div class="ai-avatar">✦</div>
+                        <div>
+                            <strong>Mindscape Tutor</strong>
+                            <span>Study assistant</span>
+                        </div>
+                        <span class="online-dot"></span>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+
+                        <div class="chat-message assistant">
+                            <div class="message-avatar">M</div>
+                            <div class="message-bubble">
+                                Hi. I'm your Mindscape study assistant.
+                                Ask me a question or choose a study action below.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="ai-actions">
+                        <button data-ai-action="explain">Explain simply</button>
+                        <button data-ai-action="quiz">Quiz me</button>
+                        <button data-ai-action="summary">Summarize</button>
+                        <button data-ai-action="flashcards">Make flashcards</button>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <textarea
+                            id="chatInput"
+                            rows="1"
+                            placeholder="Ask your study question..."
+                        ></textarea>
+
+                        <button class="primary-btn" id="sendChatBtn">Send</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TOOLS ================= -->
+        <section class="page" id="page-tools">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">STUDENT UTILITIES</p>
+                    <h1>Student Tools</h1>
+                    <p class="muted">Useful utilities for everyday college work.</p>
+                </div>
+            </div>
+
+            <div class="tools-grid">
+
+                <div class="tool-card glass">
+
+                    <div class="tool-icon">%</div>
+                    <h3>Percentage Calculator</h3>
+
+                    <input class="input tool-input" id="percentageValue" type="number" placeholder="Value">
+                    <input class="input tool-input" id="percentageTotal" type="number" placeholder="Total">
+
+                    <button class="primary-btn full" id="calculatePercentage">
+                        Calculate
+                    </button>
+
+                    <strong class="tool-result" id="percentageResult">—</strong>
+
+                </div>
+
+
+                <div class="tool-card glass">
+
+                    <div class="tool-icon">∑</div>
+                    <h3>Basic Calculator</h3>
+
+                    <input
+                        class="input"
+                        id="calculatorInput"
+                        placeholder="e.g. 25*4+10"
+                    >
+
+                    <button class="primary-btn full" id="calculateExpression">
+                        Calculate
+                    </button>
+
+                    <strong class="tool-result" id="calculatorResult">—</strong>
+
+                </div>
+
+
+                <div class="tool-card glass">
+
+                    <div class="tool-icon">CG</div>
+                    <h3>CGPA Calculator</h3>
+
+                    <input
+                        class="input"
+                        id="cgpaInput"
+                        placeholder="e.g. 8.2, 7.5, 9.0"
+                    >
+
+                    <button class="primary-btn full" id="calculateCGPA">
+                        Calculate
+                    </button>
+
+                    <strong class="tool-result" id="cgpaResult">—</strong>
+
+                </div>
+
+
+                <div class="tool-card glass">
+
+                    <div class="tool-icon">Aa</div>
+                    <h3>Text Counter</h3>
+
+                    <textarea
+                        class="input textarea"
+                        id="textCounterInput"
+                        placeholder="Paste your text..."
+                    ></textarea>
+
+                    <div class="counter-results">
+                        <span>Words <strong id="wordCount">0</strong></span>
+                        <span>Characters <strong id="characterCount">0</strong></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ANALYTICS ================= -->
+        <section class="page" id="page-analytics">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">PERFORMANCE</p>
+                    <h1>Analytics</h1>
+                    <p class="muted">Understand how consistently you study.</p>
+                </div>
+            </div>
+
+            <div class="analytics-stats">
+
+                <div class="analytics-stat glass">
+                    <span>Total Focus</span>
+                    <strong id="analyticsTotalMinutes">0 min</strong>
+                </div>
+
+                <div class="analytics-stat glass">
+                    <span>Total Sessions</span>
+                    <strong id="analyticsSessions">0</strong>
+                </div>
+
+                <div class="analytics-stat glass">
+                    <span>Average Session</span>
+                    <strong id="analyticsAverage">0 min</strong>
+                </div>
+
+                <div class="analytics-stat glass">
+                    <span>Best Day</span>
+                    <strong id="analyticsBestDay">—</strong>
+                </div>
+
+            </div>
+
+            <div class="panel glass chart-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <p class="eyebrow">LAST 7 DAYS</p>
+                        <h3>Focus activity</h3>
+                    </div>
+                </div>
+
+                <div class="bar-chart" id="weeklyChart"></div>
+
+            </div>
+
+            <div class="analytics-bottom">
+
+                <div class="panel glass">
+                    <div class="panel-header">
+                        <h3>Consistency</h3>
+                    </div>
+
+                    <div class="big-metric">
+                        <strong id="analyticsStreak">0</strong>
+                        <span>day current streak</span>
+                    </div>
+
+                    <div class="metric-row">
+                        <span>Longest streak</span>
+                        <strong id="analyticsLongestStreak">0</strong>
+                    </div>
+                </div>
+
+                <div class="panel glass">
+                    <div class="panel-header">
+                        <h3>Focus Score</h3>
+                    </div>
+
+                    <div class="analytics-score">
+                        <strong id="analyticsScore">0</strong>
+                        <span id="analyticsScoreLabel">Getting started</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ACHIEVEMENTS ================= -->
+        <section class="page" id="page-achievements">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">MILESTONES</p>
+                    <h1>Achievements</h1>
+                    <p class="muted">Earn progress through real study behavior.</p>
+                </div>
+            </div>
+
+            <div id="achievementsGrid" class="achievements-grid"></div>
+
+        </section>
+
+
+        <!-- ================= SETTINGS ================= -->
+        <section class="page" id="page-settings">
+
+            <div class="page-header">
+                <div>
+                    <p class="eyebrow">CONFIGURATION</p>
+                    <h1>Settings</h1>
+                    <p class="muted">Make Mindscape work the way you study.</p>
+                </div>
+            </div>
+
+            <div class="settings-grid">
+
+                <div class="settings-section glass">
+
+                    <div class="settings-heading">
+                        <h3>Timer</h3>
+                        <span>Focus defaults</span>
+                    </div>
+
+                    <label class="setting-row">
+                        <span>Default focus duration</span>
+                        <select id="settingFocusDuration" class="select">
+                            <option value="15">15 minutes</option>
+                            <option value="25">25 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">60 minutes</option>
+                            <option value="90">90 minutes</option>
+                        </select>
+                    </label>
+
+                    <label class="setting-row">
+                        <span>Short break</span>
+                        <select id="settingShortBreak" class="select">
+                            <option value="5">5 minutes</option>
+                            <option value="10">10 minutes</option>
+                            <option value="15">15 minutes</option>
+                        </select>
+                    </label>
+
+                    <label class="setting-row">
+                        <span>Long break</span>
+                        <select id="settingLongBreak" class="select">
+                            <option value="15">15 minutes</option>
+                            <option value="20">20 minutes</option>
+                            <option value="30">30 minutes</option>
+                        </select>
+                    </label>
+
+                    <label class="setting-row">
+                        <span>Daily goal</span>
+                        <input id="settingDailyGoal" class="small-input" type="number" min="15" max="1440">
+                    </label>
+
+                </div>
+
+
+                <div class="settings-section glass">
+
+                    <div class="settings-heading">
+                        <h3>Appearance</h3>
+                        <span>Visual environment</span>
+                    </div>
+
+                    <label class="setting-row">
+                        <span>Theme</span>
+                        <select id="settingTheme" class="select">
+                            <option value="dark">Dark</option>
+                            <option value="light">Light</option>
+                        </select>
+                    </label>
+
+                    <label class="setting-row">
+                        <span>Environment</span>
+                        <select id="settingEnvironment" class="select">
+                            <option value="ice">Ice</option>
+                            <option value="candle">Candle</option>
+                            <option value="tree">Tree</option>
+                            <option value="campfire">Campfire</option>
+                        </select>
+                    </label>
+
+                </div>
+
+
+                <div class="settings-section glass">
+
+                    <div class="settings-heading">
+                        <h3>Sound</h3>
+                        <span>Study atmosphere</span>
+                    </div>
+
+                    <label class="setting-row">
+                        <span>Sound enabled</span>
+                        <input id="settingSoundEnabled" type="checkbox" class="toggle">
+                    </label>
+
+                    <label class="setting-row">
+                        <span>Volume</span>
+                        <input id="settingVolume" type="range" min="0" max="100">
+                    </label>
+
+                </div>
+
+
+                <div class="settings-section glass">
+
+                    <div class="settings-heading">
+                        <h3>Data</h3>
+                        <span>Your information stays local.</span>
+                    </div>
+
+<button class="outline-btn full" id="exportDataBtn">
+    Export JSON
+</button>
+
+<button class="danger-btn full" id="clearDataBtn">
+    Clear All Data
+</button>
+
+<button class="outline-btn full" id="logoutBtn">
+    Logout
+</button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- CUSTOM TIMER MODAL -->
+<div class="modal-backdrop" id="customTimerModal">
+
+    <div class="modal glass">
+
+        <button class="modal-close" data-close-modal>×</button>
+
+        <p class="eyebrow">CUSTOM SESSION</p>
+        <h2>Choose your duration</h2>
+
+        <div class="custom-time-grid">
+
+            <label>
+                Hours
+                <input id="customHours" class="input" type="number" min="0" max="12" value="0">
+            </label>
+
+            <label>
+                Minutes
+                <input id="customMinutes" class="input" type="number" min="0" max="59" value="30">
+            </label>
+
+        </div>
+
+        <p class="modal-error" id="customTimerError"></p>
+
+        <button class="primary-btn full" id="applyCustomTimer">
+            Apply Duration
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- TASK MODAL -->
+<div class="modal-backdrop" id="taskModal">
+
+    <div class="modal glass">
+
+        <button class="modal-close" data-close-modal>×</button>
+
+        <p class="eyebrow">NEW TASK</p>
+        <h2>Add a task</h2>
+
+        <label>
+            Task name
+            <input id="taskNameInput" class="input" placeholder="e.g. Revise TCP/IP">
+        </label>
+
+        <label>
+            Priority
+            <select id="taskPriorityInput" class="select">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+            </select>
+        </label>
+
+        <label>
+            Subject
+            <input id="taskSubjectInput" class="input" placeholder="e.g. Computer Networks">
+        </label>
+
+        <label>
+            Estimated minutes
+            <input id="taskTimeInput" class="input" type="number" min="1" value="30">
+        </label>
+
+        <button class="primary-btn full" id="saveTaskBtn">
+            Add Task
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- SUBJECT MODAL -->
+<div class="modal-backdrop" id="subjectModal">
+
+    <div class="modal glass">
+
+        <button class="modal-close" data-close-modal>×</button>
+
+        <p class="eyebrow">NEW SUBJECT</p>
+        <h2>Create study subject</h2>
+
+        <label>
+            Subject name
+            <input id="subjectNameInput" class="input" placeholder="JavaScript">
+        </label>
+
+        <label>
+            Exam date
+            <input id="subjectExamInput" class="input" type="date">
+        </label>
+
+        <label>
+            Topics
+            <textarea
+                id="subjectTopicsInput"
+                class="input textarea"
+                placeholder="Arrays, Objects, Functions, DOM..."
+            ></textarea>
+        </label>
+
+        <button class="primary-btn full" id="saveSubjectBtn">
+            Create Subject
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FLASHCARD MODAL -->
+<div class="modal-backdrop" id="flashcardModal">
+
+    <div class="modal glass">
+
+        <button class="modal-close" data-close-modal>×</button>
+
+        <p class="eyebrow">NEW FLASHCARD</p>
+        <h2>Create flashcard</h2>
+
+        <label>
+            Question
+            <textarea id="flashcardQuestionInput" class="input textarea" placeholder="What is TCP?"></textarea>
+        </label>
+
+        <label>
+            Answer
+            <textarea id="flashcardAnswerInput" class="input textarea" placeholder="TCP is..."></textarea>
+        </label>
+
+        <label>
+            Category
+            <input id="flashcardCategoryInput" class="input" placeholder="Computer Networks">
+        </label>
+
+        <button class="primary-btn full" id="saveFlashcardBtn">
+            Create Flashcard
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="toast-container" id="toastContainer"></div>
+
+
+<script src="./script.js"></script>
+
+</body>
+</html>
