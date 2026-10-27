@@ -252,6 +252,10 @@ function bindNavigation() {
     if (mobileMenu) {
         mobileMenu.addEventListener("click", () => {
             $("#sidebar").classList.toggle("open");
+            mobileMenu.setAttribute(
+                "aria-expanded",
+                String($("#sidebar").classList.contains("open"))
+            );
         });
     }
 }
@@ -269,6 +273,12 @@ function showPage(pageName) {
             "active",
             item.dataset.page === pageName
         );
+        if (item.dataset.page) {
+            item.setAttribute(
+                "aria-current",
+                item.dataset.page === pageName ? "page" : "false"
+            );
+        }
     });
 
     const sidebar = $("#sidebar");
@@ -1090,6 +1100,11 @@ function bindTaskControls() {
         "click",
         () => openModal("taskModal")
     );
+    document.addEventListener("click", event => {
+        if (event.target.closest("#dashboardEmptyTaskCta")) {
+            openModal("taskModal");
+        }
+    });
 
     $("#saveTaskBtn")?.addEventListener(
         "click",
@@ -1235,8 +1250,7 @@ function renderTasks() {
             <button
                 class="task-delete"
                 data-task-delete="${task.id}"
-                aria-label="Delete task"
-            >×</button>
+            aria-label="Delete task"><svg class="icon"><use href="#icon-trash"></use></svg></button>
         </div>
     `).join("");
 
@@ -1391,7 +1405,7 @@ function renderSubjects() {
                             <button
                                 class="task-delete"
                                 data-subject-delete="${subject.id}"
-                            >×</button>
+                            aria-label="Delete task"><svg class="icon"><use href="#icon-trash"></use></svg></button>
                         </div>
 
                         <div class="subject-progress">
@@ -1616,6 +1630,39 @@ function reviewFlashcard(review) {
 function bindAI() {
     const sendButton = $("#sendChatBtn");
     const input = $("#chatInput");
+    const historyToggle = $("#chatHistoryToggle");
+    const history = $("#chatHistory");
+    const subjectSelect = $("#tutorSubjectSelect");
+    const subjectChips = $$(".subject-chip");
+
+    const setSubject = (subject) => {
+        subjectChips.forEach(chip => {
+            chip.classList.toggle("active", chip.dataset.tutorSubject === subject);
+        });
+        if (subjectSelect) subjectSelect.value = subject;
+    };
+
+    subjectChips.forEach(chip => {
+        chip.addEventListener("click", () => setSubject(chip.dataset.tutorSubject));
+    });
+    subjectSelect?.addEventListener("change", () => setSubject(subjectSelect.value));
+
+    historyToggle?.addEventListener("click", () => {
+        const isOpen = !history?.hidden;
+        if (history) history.hidden = isOpen;
+        historyToggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+    history?.querySelector("button")?.addEventListener("click", () => {
+        $("#chatMessages").innerHTML = `
+            <div class="chat-empty-state">
+                <div class="empty-tutor-avatar"><svg class="icon"><use href="#icon-tutor"></use></svg></div>
+                <h3>What would you like to learn?</h3>
+                <p>Pick a starting point or ask me anything.</p>
+            </div>`;
+        $(".ai-actions")?.classList.remove("has-started");
+        history.hidden = true;
+        historyToggle.setAttribute("aria-expanded", "false");
+    });
 
     if (sendButton) {
         sendButton.addEventListener("click", function (event) {
@@ -1625,6 +1672,11 @@ function bindAI() {
     }
 
     if (input) {
+        const resizeInput = () => {
+            input.style.height = "auto";
+            input.style.height = `${Math.min(input.scrollHeight, 130)}px`;
+        };
+        input.addEventListener("input", resizeInput);
         input.addEventListener("keydown", function (event) {
             if (event.key === "Enter" && !event.shiftKey) {
                 event.preventDefault();
@@ -1648,6 +1700,7 @@ function bindAI() {
             if (input) {
                 input.value = messages[action] || "";
                 input.focus();
+                input.dispatchEvent(new Event("input"));
             }
         });
     });
@@ -1669,7 +1722,10 @@ async function sendChat() {
         return;
     }
 
-    // Show user's message
+    // The empty state and suggestion grid are only useful before the first prompt.
+    $(".chat-empty-state")?.remove();
+    $(".ai-actions")?.classList.add("has-started");
+
     addChatMessage(text, "user");
 
     // Clear input
@@ -1687,7 +1743,8 @@ async function sendChat() {
                 },
 
                 body: JSON.stringify({
-                    message: text
+                    message: text,
+                    subject: $("#tutorSubjectSelect")?.value || "General"
                 })
             }
         );
@@ -1704,11 +1761,8 @@ async function sendChat() {
             );
         }
 
-        // Display Gemini response
-        addChatMessage(
-            result.reply,
-            "assistant"
-        );
+        const thinking = addThinkingMessage();
+        await streamAssistantMessage(result.reply, thinking);
 
     } catch (error) {
 
@@ -1717,11 +1771,45 @@ async function sendChat() {
             error
         );
 
-        addChatMessage(
-            "AI Tutor connection failed: " + error.message,
-            "assistant"
-        );
+        addChatMessage("AI Tutor connection failed: " + error.message, "assistant");
     }
+}
+
+function addThinkingMessage() {
+    const container = $("#chatMessages");
+    const message = document.createElement("div");
+    message.className = "chat-message assistant thinking-message";
+    message.innerHTML = `
+        <div class="message-avatar"><svg class="icon"><use href="#icon-tutor"></use></svg></div>
+        <div class="message-bubble thinking-dots"><i></i><i></i><i></i></div>
+    `;
+    container.appendChild(message);
+    container.scrollTop = container.scrollHeight;
+    return message;
+}
+
+function streamAssistantMessage(text, thinkingMessage) {
+    return new Promise(resolve => {
+        const bubble = thinkingMessage.querySelector(".message-bubble");
+        const words = String(text || "I’m ready when you are.").split(/\s+/);
+        let index = 0;
+        bubble.classList.remove("thinking-dots");
+        bubble.innerHTML = "";
+
+        const renderNext = () => {
+            bubble.textContent += `${index ? " " : ""}${words[index]}`;
+            index += 1;
+            const container = $("#chatMessages");
+            if (container) container.scrollTop = container.scrollHeight;
+            if (index < words.length) {
+                window.setTimeout(renderNext, 28);
+            } else {
+                bubble.innerHTML = formatAIResponse(bubble.textContent);
+                resolve();
+            }
+        };
+        window.setTimeout(renderNext, 260);
+    });
 }
 
 function formatAIResponse(text) {
@@ -1824,7 +1912,9 @@ function addChatMessage(text, type) {
 
     message.innerHTML = `
         <div class="message-avatar">
-            ${type === "assistant" ? "M" : "You"}
+            ${type === "assistant"
+                ? '<svg class="icon"><use href="#icon-tutor"></use></svg>'
+                : "You"}
         </div>
 
         <div class="message-bubble">
@@ -2492,15 +2582,10 @@ function calculateLongestStreak() {
    ========================================================= */
 
 function calculateFocusScore() {
-    const sessions =
-        data.sessions.length;
-
-    const totalMinutes =
-        data.sessions.reduce(
-            (sum, session) =>
-                sum + Number(session.minutes || 0),
-            0
-        );
+    const today = getDateKey(new Date());
+    const sessions = data.sessions.filter(session => session.date === today);
+    const todaySessionCount = sessions.length;
+    const todayMinutes = getTodayMinutes();
 
     const currentStreak =
         calculateCurrentStreak();
@@ -2512,9 +2597,6 @@ function calculateFocusScore() {
         data.tasks.filter(
             task => task.completed
         ).length;
-
-    const todayMinutes =
-        getTodayMinutes();
 
     const goal =
         Math.max(
@@ -2533,30 +2615,18 @@ function calculateFocusScore() {
             ? completedTasks / taskTotal
             : 0;
 
-    const sessionScore =
-        Math.min(30, sessions * 2);
+    const sessionScore = Math.min(25, todaySessionCount * 8.33);
+    const minuteScore = goalCompletion * 45;
 
-    const minuteScore =
-        Math.min(30, totalMinutes / 20);
+    const consistencyScore = Math.min(15, currentStreak * 3);
 
-    const goalScore =
-        goalCompletion * 20;
-
-    const consistencyScore =
-        Math.min(
-            15,
-            currentStreak * 2.5
-        );
-
-    const taskScore =
-        taskCompletion * 5;
+    const taskScore = taskCompletion * 15;
 
     return Math.round(
         Math.min(
             100,
             sessionScore +
             minuteScore +
-            goalScore +
             consistencyScore +
             taskScore
         )
@@ -2578,21 +2648,21 @@ function getScoreLabel(score) {
 const ACHIEVEMENTS = [
     {
         id: "first-focus",
-        icon: "◉",
+        icon: "icon-focus",
         title: "First Focus",
         description: "Complete your first focus session.",
         check: stats => stats.sessions >= 1
     },
     {
         id: "five-sessions",
-        icon: "Ⅴ",
+        icon: "5",
         title: "Five Sessions",
         description: "Complete five focus sessions.",
         check: stats => stats.sessions >= 5
     },
     {
         id: "ten-sessions",
-        icon: "Ⅹ",
+        icon: "10",
         title: "Ten Sessions",
         description: "Complete ten focus sessions.",
         check: stats => stats.sessions >= 10
@@ -2627,7 +2697,7 @@ const ACHIEVEMENTS = [
     },
     {
         id: "ice-melt",
-        icon: "◆",
+        icon: "icon-spark",
         title: "First Ice Melt",
         description: "Complete a session using Ice.",
         check: stats =>
@@ -2635,7 +2705,7 @@ const ACHIEVEMENTS = [
     },
     {
         id: "tree-growth",
-        icon: "♧",
+        icon: "icon-tree",
         title: "First Tree Growth",
         description: "Complete a session using Tree.",
         check: stats =>
@@ -2643,7 +2713,7 @@ const ACHIEVEMENTS = [
     },
     {
         id: "twenty-five-tasks",
-        icon: "✓",
+        icon: "icon-check",
         title: "25 Tasks Completed",
         description: "Complete twenty-five tasks.",
         check: stats =>
@@ -2729,7 +2799,9 @@ function renderAchievements() {
                 <div class="achievement-card glass ${unlocked ? "unlocked" : ""}">
 
                     <div class="achievement-icon">
-                        ${achievement.icon}
+                        ${achievement.icon.startsWith("icon-")
+                            ? `<svg class="icon"><use href="#${achievement.icon}"></use></svg>`
+                            : `<span class="achievement-badge">${achievement.icon}</span>`}
                     </div>
 
                     <h3>
@@ -2758,6 +2830,8 @@ function renderAchievements() {
 function renderDashboard() {
     const todayMinutes =
         getTodayMinutes();
+    const todayKey = getDateKey(new Date());
+    const todaySessions = data.sessions.filter(session => session.date === todayKey);
 
     const goal =
         Number(data.settings.dailyGoal) || 120;
@@ -2773,19 +2847,10 @@ function renderDashboard() {
     const score =
         calculateFocusScore();
 
-    $("#todayMinutes").textContent =
-        todayMinutes;
-
-    $("#totalSessions").textContent =
-        data.sessions.length;
-
-    $("#currentStreak").textContent =
-        calculateCurrentStreak();
-
-    $("#tasksDone").textContent =
-        data.tasks.filter(
-            task => task.completed
-        ).length;
+    animateCount($("#todayMinutes"), todayMinutes);
+    animateCount($("#totalSessions"), todaySessions.length);
+    animateCount($("#currentStreak"), calculateCurrentStreak());
+    animateCount($("#tasksDone"), data.tasks.filter(task => task.completed).length);
 
     $("#goalMinutesDisplay").textContent =
         todayMinutes;
@@ -2799,17 +2864,83 @@ function renderDashboard() {
     $("#dailyGoalBar").style.width =
         `${percentage}%`;
 
-    $("#dashboardScore").textContent =
-        score;
+    animateCount($("#dashboardScore"), score);
 
     $("#dashboardScoreLabel").textContent =
         getScoreLabel(score);
 
-    $("#dashboardScoreBar").style.width =
-        `${score}%`;
+    const ring = $("#dashboardScoreRing");
+    if (ring) ring.style.setProperty("--score", score);
+
+    renderScoreHistory();
+
+    const sidebarStreak = $("#sidebarStreak");
+    if (sidebarStreak) sidebarStreak.textContent = calculateCurrentStreak();
+    const sidebarNextSession = $("#sidebarNextSession");
+    if (sidebarNextSession) {
+        sidebarNextSession.textContent = data.timer.running
+            ? "Next session: in progress"
+            : `Next session: ${Math.round((data.timer.duration || 1500) / 60)} min focus`;
+    }
+
+    const heroProgress = $("#heroPlanProgress");
+    const heroBar = $("#heroPlanBar");
+    const heroMinutes = $("#heroPlanMinutes");
+    const heroTarget = $("#heroPlanTarget");
+    if (heroProgress) heroProgress.textContent = percentage;
+    if (heroBar) heroBar.style.width = `${percentage}%`;
+    if (heroMinutes) heroMinutes.textContent = todayMinutes;
+    if (heroTarget) heroTarget.textContent = goal;
 
     renderDashboardTasks();
     renderDashboardExams();
+}
+
+function animateCount(element, target) {
+    if (!element) return;
+    const value = Number(target) || 0;
+    const start = Number(element.dataset.value || 0);
+    element.dataset.value = value;
+    if (start === value || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        element.textContent = value;
+        return;
+    }
+    const started = performance.now();
+    const duration = 550;
+    function tick(now) {
+        const progress = Math.min(1, (now - started) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        element.textContent = Math.round(start + (value - start) * eased);
+        if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+function renderScoreHistory() {
+    const chart = $("#scoreMiniChart");
+    if (!chart) return;
+    const goal = Math.max(1, Number(data.settings.dailyGoal) || 120);
+    const today = new Date();
+    const hasSessions = data.sessions.length > 0;
+    const sampleValues = [28, 52, 36, 68, 46, 74, 58];
+    const days = Array.from({ length: 7 }, (_, index) => {
+        const date = new Date(today);
+        date.setDate(today.getDate() - (6 - index));
+        const key = getDateKey(date);
+        const minutes = data.sessions
+            .filter(session => session.date === key)
+            .reduce((sum, session) => sum + Number(session.minutes || 0), 0);
+        const value = hasSessions
+            ? Math.min(100, Math.round(minutes / goal * 100))
+            : sampleValues[index];
+        return { label: date.toLocaleDateString(undefined, { weekday: "short" }).slice(0, 1), value, sample: !hasSessions };
+    });
+    chart.innerHTML = days.map(day => `
+        <span class="mini-chart-bar-wrap">
+            <span class="mini-chart-bar" style="height:${Math.max(8, day.value)}%" title="${day.sample ? "Sample " : ""}${day.value}%"></span>
+            <small>${day.label}</small>
+        </span>
+    `).join("");
 }
 
 function renderDashboardTasks() {
@@ -2823,7 +2954,11 @@ function renderDashboardTasks() {
 
     if (!tasks.length) {
         container.innerHTML =
-            `<div class="empty-state">No tasks yet.</div>`;
+            `<div class="empty-state">
+                <strong>Your day is a blank canvas.</strong>
+                <span>Add one small task to get moving.</span>
+                <button class="outline-btn" id="dashboardEmptyTaskCta" type="button">Add your first task</button>
+            </div>`;
         return;
     }
 
@@ -2845,7 +2980,7 @@ function renderDashboardTasks() {
                 <button
                     class="task-delete"
                     data-task-delete="${task.id}"
-                >×</button>
+                aria-label="Delete task"><svg class="icon"><use href="#icon-trash"></use></svg></button>
 
             </div>
         `).join("");
@@ -2879,7 +3014,11 @@ function renderDashboardExams() {
 
     if (!exams.length) {
         container.innerHTML =
-            `<div class="empty-state">Add an exam to your Study Plan.</div>`;
+            `<div class="empty-state">
+                <strong>No deadlines on the horizon.</strong>
+                <span>Keep your next milestone somewhere visible.</span>
+                <button class="outline-btn" type="button" onclick="showPage('study')">Add a study subject</button>
+            </div>`;
         return;
     }
 
@@ -2927,8 +3066,7 @@ function renderDistractions() {
 
                 <button
                     data-distraction-delete="${item.id}"
-                    aria-label="Delete distraction"
-                >×</button>
+                aria-label="Delete distraction"><svg class="icon"><use href="#icon-trash"></use></svg></button>
             </div>
         `).join("");
 

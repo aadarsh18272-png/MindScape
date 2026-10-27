@@ -8,18 +8,42 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+<svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16M8 7h8M8 11h8"/></symbol>
+    <symbol id="icon-focus" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></symbol>
+    <symbol id="icon-cards" viewBox="0 0 24 24"><rect x="4" y="5" width="13" height="15" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v12M8 10h5M8 14h6"/></symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 2 1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><path d="m19 17 .7 2.3L22 20l-2.3.7L19 23l-.7-2.3L16 20l2.3-.7z"/></symbol>
+    <symbol id="icon-tools" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18a2.1 2.1 0 0 0 3 3l6.3-6.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/><path d="m14 4 6 6"/></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="m7 15 3-4 3 2 5-7"/></symbol>
+    <symbol id="icon-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="m8.5 12.5-1 8 4.5-2.5 4.5 2.5-1-8"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m4.9 4.9 1.4 1.4M17.7 17.7l1.4 1.4M3 12h2M19 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4M12 3v2M12 19v2"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-trend" viewBox="0 0 24 24"><path d="M5 16 10 11l3 3 6-7"/><path d="M15 7h4v4"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-music" viewBox="0 0 24 24"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></symbol>
+    <symbol id="icon-rain" viewBox="0 0 24 24"><path d="M6 17h12a4 4 0 0 0 .4-8A6 6 0 0 0 7 8.5 4.5 4.5 0 0 0 6 17Z"/><path d="m8 19-1 2M12 19l-1 2M16 19l-1 2"/></symbol>
+    <symbol id="icon-tree" viewBox="0 0 24 24"><path d="m12 3 4 6h-2l4 6h-4v5h-4v-5H6l4-6H8z"/><path d="M5 21h14"/></symbol>
+    <symbol id="icon-fire" viewBox="0 0 24 24"><path d="M12 21a6 6 0 0 0 5-9c-.8 2-2 2.5-2 2.5.4-4.1-2.1-7.2-4.3-9.5.2 3.2-1.1 4.8-2.2 6.1A7 7 0 0 0 12 21Z"/></symbol>
+    <symbol id="icon-wave" viewBox="0 0 24 24"><path d="M3 9c3-4 6 4 9 0s6 4 9 0M3 15c3-4 6 4 9 0s6 4 9 0"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3"/></symbol>
+    <symbol id="icon-tutor" viewBox="0 0 24 24"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H15a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-3l-4.5 3v-3H8.5A3.5 3.5 0 0 1 5 14.5z"/><path d="M9 9.5h.01M15 9.5h.01M9 13c1.7 1.2 4.3 1.2 6 0"/></symbol>
+</svg>
 <!-- AUTH SCREEN -->
 <div id="loginScreen" class="login-screen">
 
     <div class="login-card">
 
-        <div class="brand-mark">M</div>
+        <div class="brand-mark"><svg class="brand-symbol" viewBox="0 0 64 64" aria-hidden="true"><path d="M17 43V21h7.5l7.5 10 7.5-10H47v22h-7V31.5l-8 10.1-8-10.1V43z"/><circle cx="49" cy="15" r="4"/></svg></div>
 
         <!-- SIGN IN -->
         <form id="loginForm">
@@ -121,52 +145,52 @@
     <aside class="sidebar" id="sidebar">
 
         <div class="brand">
-            <div class="brand-mark">M</div>
+            <div class="brand-mark"><svg class="brand-symbol" viewBox="0 0 64 64" aria-hidden="true"><path d="M17 43V21h7.5l7.5 10 7.5-10H47v22h-7V31.5l-8 10.1-8-10.1V43z"/><circle cx="49" cy="15" r="4"/></svg></div>
             <div>
                 <strong>MINDSCAPE</strong>
-                <span>Focus. Transform. Grow.</span>
+                <span>Focus · Transform · Grow</span>
             </div>
         </div>
 
         <nav class="main-nav" aria-label="Main navigation">
 
             <button class="nav-item active" data-page="dashboard">
-                <span class="nav-icon">⌂</span>
+                <svg class="nav-icon"><use href="#icon-home"></use></svg>
                 <span>Dashboard</span>
             </button>
 
             <button class="nav-item" data-page="study">
-                <span class="nav-icon">▣</span>
+                <svg class="nav-icon"><use href="#icon-book"></use></svg>
                 <span>Study Plan</span>
             </button>
 
             <button class="nav-item" data-page="focus">
-                <span class="nav-icon">◉</span>
+                <svg class="nav-icon"><use href="#icon-focus"></use></svg>
                 <span>Focus</span>
             </button>
 
             <button class="nav-item" data-page="flashcards">
-                <span class="nav-icon">▤</span>
+                <svg class="nav-icon"><use href="#icon-cards"></use></svg>
                 <span>Flashcards</span>
             </button>
 
             <button class="nav-item" data-page="ai">
-                <span class="nav-icon">✦</span>
+                <svg class="nav-icon"><use href="#icon-spark"></use></svg>
                 <span>AI Tutor</span>
             </button>
 
             <button class="nav-item" data-page="tools">
-                <span class="nav-icon">⌘</span>
+                <svg class="nav-icon"><use href="#icon-tools"></use></svg>
                 <span>Student Tools</span>
             </button>
 
             <button class="nav-item" data-page="analytics">
-                <span class="nav-icon">▥</span>
+                <svg class="nav-icon"><use href="#icon-chart"></use></svg>
                 <span>Analytics</span>
             </button>
 
             <button class="nav-item" data-page="achievements">
-                <span class="nav-icon">◇</span>
+                <svg class="nav-icon"><use href="#icon-award"></use></svg>
                 <span>Achievements</span>
             </button>
 
@@ -174,13 +198,14 @@
 
         <div class="sidebar-bottom">
             <button class="nav-item" data-page="settings">
-                <span class="nav-icon">⚙</span>
+                <svg class="nav-icon"><use href="#icon-settings"></use></svg>
                 <span>Settings</span>
             </button>
 
-            <div class="sidebar-quote">
-                <span>Your focus</span>
-                <strong>changes the world.</strong>
+            <div class="sidebar-widget">
+                <div class="widget-kicker"><svg class="icon"><use href="#icon-trend"></use></svg> LIVE PROGRESS</div>
+                <strong><span id="sidebarStreak">0</span> day streak</strong>
+                <span id="sidebarNextSession">Next session: ready when you are</span>
             </div>
         </div>
 
@@ -188,14 +213,14 @@
 
     <!-- MOBILE HEADER -->
     <header class="mobile-header">
-        <button class="icon-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+        <button class="icon-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar"><svg class="icon"><use href="#icon-menu"></use></svg></button>
 
         <div class="mobile-brand">
-            <span class="brand-mark small">M</span>
+            <span class="brand-mark small"><svg class="brand-symbol" viewBox="0 0 64 64" aria-hidden="true"><path d="M17 43V21h7.5l7.5 10 7.5-10H47v22h-7V31.5l-8 10.1-8-10.1V43z"/><circle cx="49" cy="15" r="4"/></svg></span>
             <strong>MINDSCAPE</strong>
         </div>
 
-        <button class="icon-btn" data-page="settings" aria-label="Settings">⚙</button>
+        <button class="icon-btn" data-page="settings" aria-label="Settings"><svg class="icon"><use href="#icon-settings"></use></svg></button>
     </header>
 
     <!-- MAIN -->
@@ -211,10 +236,6 @@
                     <p class="muted" id="currentDate"></p>
                 </div>
 
-                <button class="primary-btn" data-page="focus">
-                    <span>Start Focus</span>
-                    <span>→</span>
-                </button>
             </div>
 
             <div class="hero-grid">
@@ -228,14 +249,16 @@
                             What will you accomplish today?
                         </p>
 
-                        <button class="outline-btn" data-page="focus">
-                            Begin a session
+                        <button class="outline-btn" data-page="study">
+                            View today's plan
                         </button>
                     </div>
 
-                    <div class="hero-orb">
-                        <div class="orb-ring"></div>
-                        <div class="orb-core"></div>
+                    <div class="hero-plan-preview">
+                        <span class="preview-label">TODAY'S PLAN</span>
+                        <strong><span id="heroPlanProgress">0</span>% ready</strong>
+                        <div class="preview-track"><span id="heroPlanBar"></span></div>
+                        <small><span id="heroPlanMinutes">0</span> of <span id="heroPlanTarget">120</span> min focused</small>
                     </div>
                 </div>
 
@@ -245,11 +268,13 @@
                         <span class="status-dot"></span>
                     </div>
 
-                    <div class="score-number" id="dashboardScore">0</div>
+                    <div class="score-ring" id="dashboardScoreRing" style="--score: 0">
+                        <div class="score-number" id="dashboardScore">0</div>
+                    </div>
                     <div class="score-label" id="dashboardScoreLabel">Getting started</div>
 
-                    <div class="score-bar">
-                        <span id="dashboardScoreBar"></span>
+                    <div class="score-history" aria-label="Focus score over the last 7 days">
+                        <div class="mini-chart" id="scoreMiniChart"></div>
                     </div>
 
                     <p class="muted">
@@ -263,7 +288,7 @@
             <div class="stats-grid">
 
                 <div class="stat-card glass">
-                    <span class="stat-icon">◷</span>
+                    <span class="stat-icon"><svg class="icon"><use href="#icon-clock"></use></svg></span>
                     <div>
                         <small>Today's Focus</small>
                         <strong><span id="todayMinutes">0</span> min</strong>
@@ -271,15 +296,15 @@
                 </div>
 
                 <div class="stat-card glass">
-                    <span class="stat-icon">◉</span>
+                    <span class="stat-icon"><svg class="icon"><use href="#icon-focus"></use></svg></span>
                     <div>
-                        <small>Sessions</small>
+                        <small>Today's Sessions</small>
                         <strong id="totalSessions">0</strong>
                     </div>
                 </div>
 
                 <div class="stat-card glass">
-                    <span class="stat-icon">↗</span>
+                    <span class="stat-icon"><svg class="icon"><use href="#icon-trend"></use></svg></span>
                     <div>
                         <small>Current Streak</small>
                         <strong><span id="currentStreak">0</span> days</strong>
@@ -287,7 +312,7 @@
                 </div>
 
                 <div class="stat-card glass">
-                    <span class="stat-icon">✓</span>
+                    <span class="stat-icon"><svg class="icon"><use href="#icon-check"></use></svg></span>
                     <div>
                         <small>Tasks Done</small>
                         <strong id="tasksDone">0</strong>
@@ -365,25 +390,25 @@
 
                     <div class="quick-actions">
                         <button class="quick-action" data-page="focus">
-                            <span>◉</span>
+                            <span><svg class="icon"><use href="#icon-focus"></use></svg></span>
                             <strong>Focus</strong>
                             <small>Start a session</small>
                         </button>
 
                         <button class="quick-action" data-page="flashcards">
-                            <span>▤</span>
+                            <span><svg class="icon"><use href="#icon-cards"></use></svg></span>
                             <strong>Flashcards</strong>
                             <small>Revise quickly</small>
                         </button>
 
                         <button class="quick-action" data-page="ai">
-                            <span>✦</span>
+                            <span><svg class="icon"><use href="#icon-spark"></use></svg></span>
                             <strong>AI Tutor</strong>
                             <small>Ask a question</small>
                         </button>
 
                         <button class="quick-action" data-page="tools">
-                            <span>⌘</span>
+                            <span><svg class="icon"><use href="#icon-tools"></use></svg></span>
                             <strong>Tools</strong>
                             <small>Student utilities</small>
                         </button>
@@ -667,27 +692,27 @@
                 <div class="sound-controls">
 
                     <button class="sound-option active" data-sound="lofi">
-                        <span>♫</span>
+                        <span><svg class="icon"><use href="#icon-music"></use></svg></span>
                         <strong>Lo-fi</strong>
                     </button>
 
                     <button class="sound-option" data-sound="rain">
-                        <span>≈</span>
+                        <span><svg class="icon"><use href="#icon-rain"></use></svg></span>
                         <strong>Rain</strong>
                     </button>
 
                     <button class="sound-option" data-sound="forest">
-                        <span>♧</span>
+                        <span><svg class="icon"><use href="#icon-tree"></use></svg></span>
                         <strong>Forest</strong>
                     </button>
 
                     <button class="sound-option" data-sound="fireplace">
-                        <span>♨</span>
+                        <span><svg class="icon"><use href="#icon-fire"></use></svg></span>
                         <strong>Fireplace</strong>
                     </button>
 
                     <button class="sound-option" data-sound="white">
-                        <span>∿</span>
+                        <span><svg class="icon"><use href="#icon-wave"></use></svg></span>
                         <strong>White Noise</strong>
                     </button>
 
@@ -822,31 +847,50 @@
                 <div class="ai-chat glass">
 
                     <div class="ai-header">
-                        <div class="ai-avatar">✦</div>
+                        <div class="ai-avatar"><svg class="icon"><use href="#icon-tutor"></use></svg></div>
                         <div>
                             <strong>Mindscape Tutor</strong>
                             <span>Study assistant</span>
                         </div>
                         <span class="online-dot"></span>
+                        <button class="chat-history-toggle" id="chatHistoryToggle" type="button" aria-expanded="false">History</button>
+                    </div>
+
+                    <div class="ai-toolbar">
+                        <span class="toolbar-label">SUBJECT</span>
+                        <div class="subject-chips" role="group" aria-label="Tutor subject">
+                            <button class="subject-chip active" type="button" data-tutor-subject="General">General</button>
+                            <button class="subject-chip" type="button" data-tutor-subject="Computer Science">Computer Science</button>
+                            <button class="subject-chip" type="button" data-tutor-subject="Mathematics">Mathematics</button>
+                            <button class="subject-chip" type="button" data-tutor-subject="Biology">Biology</button>
+                        </div>
+                        <select id="tutorSubjectSelect" class="select" aria-label="Choose tutor subject">
+                            <option>General</option>
+                            <option>Computer Science</option>
+                            <option>Mathematics</option>
+                            <option>Biology</option>
+                        </select>
+                    </div>
+                    <div class="chat-history" id="chatHistory" hidden>
+                        <span>Recent chats</span>
+                        <button type="button">Start a fresh topic</button>
                     </div>
 
                     <div class="chat-messages" id="chatMessages">
 
-                        <div class="chat-message assistant">
-                            <div class="message-avatar">M</div>
-                            <div class="message-bubble">
-                                Hi. I'm your Mindscape study assistant.
-                                Ask me a question or choose a study action below.
-                            </div>
+                        <div class="chat-empty-state">
+                            <div class="empty-tutor-avatar"><svg class="icon"><use href="#icon-tutor"></use></svg></div>
+                            <h3>What would you like to learn?</h3>
+                            <p>Pick a starting point or ask me anything.</p>
                         </div>
 
                     </div>
 
                     <div class="ai-actions">
-                        <button data-ai-action="explain">Explain simply</button>
-                        <button data-ai-action="quiz">Quiz me</button>
-                        <button data-ai-action="summary">Summarize</button>
-                        <button data-ai-action="flashcards">Make flashcards</button>
+                        <button data-ai-action="explain"><svg class="icon"><use href="#icon-tutor"></use></svg><span><strong>Explain simply</strong><small>Break down a tricky idea</small></span></button>
+                        <button data-ai-action="quiz"><svg class="icon"><use href="#icon-focus"></use></svg><span><strong>Quiz me</strong><small>Test what you know</small></span></button>
+                        <button data-ai-action="summary"><svg class="icon"><use href="#icon-book"></use></svg><span><strong>Summarize</strong><small>Make notes in a minute</small></span></button>
+                        <button data-ai-action="flashcards"><svg class="icon"><use href="#icon-cards"></use></svg><span><strong>Make flashcards</strong><small>Turn notes into recall cards</small></span></button>
                     </div>
 
                     <div class="chat-input-area">
@@ -1190,13 +1234,32 @@
 
 </div>
 
+<!-- MOBILE PRIMARY NAV -->
+<nav class="mobile-bottom-nav" aria-label="Mobile primary navigation">
+    <button class="nav-item active" data-page="dashboard" aria-label="Dashboard">
+        <svg class="nav-icon"><use href="#icon-home"></use></svg><span>Home</span>
+    </button>
+    <button class="nav-item" data-page="study" aria-label="Study plan">
+        <svg class="nav-icon"><use href="#icon-book"></use></svg><span>Study</span>
+    </button>
+    <button class="nav-item nav-item-focus" data-page="focus" aria-label="Start focus">
+        <svg class="nav-icon"><use href="#icon-focus"></use></svg><span>Focus</span>
+    </button>
+    <button class="nav-item" data-page="ai" aria-label="AI tutor">
+        <svg class="nav-icon"><use href="#icon-spark"></use></svg><span>Tutor</span>
+    </button>
+    <button class="nav-item" data-page="settings" aria-label="Settings">
+        <svg class="nav-icon"><use href="#icon-settings"></use></svg><span>More</span>
+    </button>
+</nav>
+
 
 <!-- CUSTOM TIMER MODAL -->
 <div class="modal-backdrop" id="customTimerModal">
 
     <div class="modal glass">
 
-        <button class="modal-close" data-close-modal>×</button>
+        <button class="modal-close" data-close-modal aria-label="Close dialog"><svg class="icon"><use href="#icon-close"></use></svg></button>
 
         <p class="eyebrow">CUSTOM SESSION</p>
         <h2>Choose your duration</h2>
@@ -1231,7 +1294,7 @@
 
     <div class="modal glass">
 
-        <button class="modal-close" data-close-modal>×</button>
+        <button class="modal-close" data-close-modal aria-label="Close dialog"><svg class="icon"><use href="#icon-close"></use></svg></button>
 
         <p class="eyebrow">NEW TASK</p>
         <h2>Add a task</h2>
@@ -1274,7 +1337,7 @@
 
     <div class="modal glass">
 
-        <button class="modal-close" data-close-modal>×</button>
+        <button class="modal-close" data-close-modal aria-label="Close dialog"><svg class="icon"><use href="#icon-close"></use></svg></button>
 
         <p class="eyebrow">NEW SUBJECT</p>
         <h2>Create study subject</h2>
@@ -1312,7 +1375,7 @@
 
     <div class="modal glass">
 
-        <button class="modal-close" data-close-modal>×</button>
+        <button class="modal-close" data-close-modal aria-label="Close dialog"><svg class="icon"><use href="#icon-close"></use></svg></button>
 
         <p class="eyebrow">NEW FLASHCARD</p>
         <h2>Create flashcard</h2>

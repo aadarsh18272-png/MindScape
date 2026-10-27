@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Mindscape</title>
+  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 5C16.2 5 5 15.6 5 28.5c0 7.6 4.1 14.2 10.5 17.8V55l9-4.4c1.8.5 3.6.7 5.5.7 13.8 0 25-10.4 25-23.3S43.8 5 30 5Z" stroke-width="2.3"/>
+    <path d="m12 34 9-10 7 6 7-9 13 13" stroke-width="3.5"/>
+    <path d="M21 40h18" stroke-width="2" opacity=".65"/>
+  </g>
+  <text x="69" y="41" fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="33" font-weight="700" letter-spacing="-1.1">Mindscape</text>
+</svg>
