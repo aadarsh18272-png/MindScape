@@ -9,7 +9,7 @@ console.log(
 );
 
 router.post("/", async (req, res) => {
-    console.log("🔥 AI TUTOR REQUEST RECEIVED");
+    console.log("AI TUTOR REQUEST RECEIVED");
 
     try {
         const { message, mode = "explain" } = req.body;
@@ -107,14 +107,14 @@ ${message}
 
         const prompt = prompts[mode] || prompts.explain;
 
-        console.log("🤖 Sending request to Gemini...");
+        console.log(" Sending request to Gemini...");
 
         const response = await ai.models.generateContent({
             model: "gemini-3.6-flash",
             contents: prompt
         });
 
-        console.log("✅ Gemini response received");
+        console.log(" Gemini response received");
 
         return res.json({
             success: true,
@@ -122,7 +122,7 @@ ${message}
         });
 
     } catch (error) {
-        console.error("❌ GEMINI ERROR");
+        console.error(" GEMINI ERROR");
         console.error(error);
 
         return res.status(500).json({

@@ -18,7 +18,7 @@ const focusRoutes = require("./routes/focusRoutes");
 const statsRoutes = require("./routes/statsRoutes");
 const aiTutorRoutes = require("./routes/aiTutorRoutes");
 
-console.log("🔥 AI TUTOR ROUTE FILE LOADED");
+console.log("AI TUTOR ROUTE FILE LOADED");
 
 // Connect MongoDB
 connectDB();
@@ -35,7 +35,20 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(express.static(path.join(__dirname, "../frontend"), {
+    setHeaders(res, filePath) {
+        const extension = path.extname(filePath).toLowerCase();
+        const contentTypes = {
+            ".html": "text/html; charset=utf-8",
+            ".css": "text/css; charset=utf-8",
+            ".js": "text/javascript; charset=utf-8"
+        };
+
+        if (contentTypes[extension]) {
+            res.setHeader("Content-Type", contentTypes[extension]);
+        }
+    }
+}));
 
 
 // ==============================
@@ -54,6 +67,8 @@ app.use("/api/ai-tutor", aiTutorRoutes);
 // ==============================
 
 app.get("/", (req, res) => {
+    res.type("html");
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.sendFile(
         path.join(__dirname, "../frontend/index.html")
     );
